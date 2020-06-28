@@ -8,10 +8,10 @@ function printStars(n) {
         for(i=0;i<n;i++){
         star +="*\n"
         }
-        return star
+        console.log(star)
     } else {
         console.log("please enter a number between 1 to 30")
     }
 }
 
-console.log(printStars(6))
+printStars(6)
