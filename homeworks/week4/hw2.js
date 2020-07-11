@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const request = require('request');
 const process = require('process');
 
@@ -9,11 +10,16 @@ if (arg === 'list') {
     'https://lidemy-book-store.herokuapp.com/books?_limit=20',
 
     (error, response, body) => {
+      if (error) {
+        return console.log('抓取失敗', error);
+      }
       const books = JSON.parse(body);
 
       for (let i = 0; i < books.length; i += 1) {
         console.log(`${books[i].id} ${books[i].name}`);
       }
+      /* eslint-disable-next-line */
+      return;
     },
   );
 } else if (arg === 'read') {
@@ -22,14 +28,23 @@ if (arg === 'list') {
     `https://lidemy-book-store.herokuapp.com/books/${id}`,
 
     (error, response, body) => {
+      if (error) {
+        return console.log('抓取失敗', error);
+      }
       const books = JSON.parse(body);
-      console.log(books.name);
+      return console.log(books.name);
     },
   );
 } else if (arg === 'delete') {
   const id = process.argv[3];
   request.delete(
     `https://lidemy-book-store.herokuapp.com/books/${id}`,
+    (error, response, body) => {
+      if (error) {
+        return console.log('刪除失敗', error);
+      }
+      return console.log('刪除成功');
+    },
   );
 } else if (arg === 'create') {
   const bookName = process.argv[3];
@@ -39,6 +54,12 @@ if (arg === 'list') {
       form: {
         name: bookName,
       },
+    },
+    (error, response, body) => {
+      if (error) {
+        return console.log('新增失敗', error);
+      }
+      return console.log('新增成功');
     },
   );
 } else if (arg === 'update') {
@@ -51,6 +72,12 @@ if (arg === 'list') {
       form: {
         name: newName,
       },
+    },
+    (error, response, body) => {
+      if (error) {
+        return console.log('更改失敗', error);
+      }
+      return console.log('更新成功');
     },
   );
 }
