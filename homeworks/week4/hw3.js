@@ -10,6 +10,10 @@ function searchCountry(country) {
     `${API_ENDPOINT}name/${country}`,
 
     (err, res, body) => {
+      if (res.statusCode === 404) {
+        console.log('找不到國家資訊');
+      }
+
       const details = JSON.parse(body);
 
       for (let i = 0; i < details.length; i += 1) {
