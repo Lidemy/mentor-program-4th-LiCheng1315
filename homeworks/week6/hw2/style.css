@@ -1,0 +1,84 @@
+body {
+  background-color: rgb(240, 240, 240);
+}
+.wrapper {
+    max-width: 645px;
+    background: white;
+    margin: 10% auto;
+    box-shadow: 1.8px 2.4px 5px 0 rgba(0, 0, 0, 0.3);
+    border-top: solid 8px #fad312;
+    padding: 54px 32px 35px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 36px;
+  letter-spacing: -1.8px;
+}
+
+.form__desc {
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 35px;
+  margin-bottom:0;
+}
+
+.must {
+  font-size: 16px;
+  color: #e74149;
+  margin-top: 22px;
+  margin-bottom: 55px;
+}
+
+.question + .question {
+  margin-top: 49px;
+}
+
+.question-title {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.required::after {
+  content:" *";
+  color: #e74149;
+  font-size: 20px;
+}
+
+label + label {
+  display: block;
+  margin-top: 23px;
+}
+
+.input_text {
+  border: solid 1px #d0d0d0;
+}
+
+.form__message {
+  margin-top: -8px;
+  margin-bottom: 24px;
+}
+
+
+.submit {
+  margin-top: 55px;
+  background-color: #fad312;
+  border: none;
+  border-radius: 3px;
+  padding: 13px 30px;
+}
+
+.submit:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: transform 0.2s;
+}
+
+footer {
+  font-size: 13px;
+  color: #999999;
+  background-color: black;
+  text-align: center;
+  line-height: 60px;
+  height: 60px;
+}
