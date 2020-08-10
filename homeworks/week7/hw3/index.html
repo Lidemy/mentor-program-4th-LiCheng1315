@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>To do List</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" />
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+  <div class="toDoList">
+    <div class="listTitle">
+      <h1>To Do List</h1>
+    </div>
+    <form class="textInput">
+      <input placeholder="To Do"></input>
+      <div class="add-btn">Add</div>
+    </form>
+    
+    <ul class="items">
+      <hr>
+      <!--<li class="item">
+        <div class="checkbox">&#9634</div>
+        <div class="itemName">List</div>
+        <div class="delete">X</div>
+      </li>
+    -->
+    </ul>
+  </div>
+</body>
+<script>
+
+  document.querySelector('.add-btn').addEventListener('click', 
+    function(e) {
+      e.preventDefault();
+      const toDo = document.querySelector('input').value;
+
+      if( toDo !== ''){
+        const toDoHTML = `<li>
+          <div class="itemName">${toDo}</div>
+          <div class="delete">X</div>
+          <hr>
+          </li>`
+        document.querySelector('ul').innerHTML += toDoHTML;
+        document.querySelector('input').value = '';
+      }
+      
+    }
+  )
+  
+  document.querySelector('ul').addEventListener('click',
+    function(e) {
+      if(e.target.classList.contains('delete')) {
+        e.target.parentNode.remove('item');
+      }
+
+      if(!(e.target.classList.contains('delete')) && e.target.nodeName === 'LI') {
+        e.target.querySelector('.itemName').classList.toggle('itemName-check');
+      }
+
+    }
+  )
+
+</script>
+</html>
