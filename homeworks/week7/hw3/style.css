@@ -1,0 +1,124 @@
+body {
+  background-color: rgb(72,27,95);
+}
+
+
+.toDoList {
+  border: solid 4px #8E78D9;
+  border-radius: 15px;
+  position: absolute;
+  display: inline-block;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  background-color: #0028E5;
+}
+
+.listTitle {
+  text-align: center;
+  padding: 25px 90px;
+  background-color: #4122A5;
+  border-radius: 10px 10px 0px 0px;
+}
+
+
+form {
+  text-align: center;
+  margin-top: 25px;
+}
+
+input {
+  width: 74%;
+}
+
+
+.add-btn {
+  display: inline-block;
+  background-color: #8E78D9;
+  color: #05ffa1;
+  padding: 3px 5px 2px 5px;
+  border-radius: 2px;
+  margin-left: 2px;
+  transition: 0.3s; 
+}
+
+.add-btn:hover {
+  cursor: pointer;
+  background-color: #05ffa1;
+  color: #8E78D9;
+}
+
+
+h1 {
+  margin: 0px;
+  color: #05ffa1;
+  font-family: 'Monoton', cursive;
+  font-size: 40px;
+}
+
+hr {
+  margin-top: 10px;
+}
+
+ul {
+  padding: 0px 18px;
+}
+
+ul:hover {
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
+  position: relative;
+}
+
+
+
+/*
+.checkbox {
+  display: inline-block;
+}
+*/
+
+.itemName {
+  display: inline-block;
+  color: #05ffa1;
+  margin-left: 16px;
+  cursor: default;
+  font-weight: bold;
+}
+
+.itemName-check {
+  text-decoration: line-through;
+  margin-left: 4px;
+}
+
+.itemName-check::before {
+  content: "✔     "; 
+  display:inline-block;
+  text-decoration: none;
+  color: #fffb96;
+}
+
+
+
+.delete {
+  display: inline-block;
+  position: absolute;
+  
+  right: 8px;
+  top: -3px;
+  padding: 2px 14px;
+}
+
+.delete:hover {
+  background-color: #05ffa1;
+  border: solid 1px #4122A5;
+  color: #fffb96;
+}
+
+.checkbox {
+  transition-duration: 0.5s;
+  font-size: 20px;
+}

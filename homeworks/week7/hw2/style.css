@@ -1,0 +1,210 @@
+.navbar {
+    box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
+    padding: 0px 24px;
+  }
+  .navbar .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 84px;
+    background-color: white;
+  }
+
+  
+
+  .navbar__sitename {
+    color: #489846;
+    font-size: 36px;
+  }
+  .navbar__list {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    font-size: 18px;
+    display: flex;
+  }
+
+  .navbar__list li {
+    margin-left: 36px;
+    border-radius: 8px;
+    transition: background 0.2s ease-in;
+  }
+
+  .navbar__list li.active, .navbar__list li:hover {
+    background-color: #ff7286;
+  }
+
+  .navbar__list li.active a, .navbar__list li:hover a {
+    color: white;
+  }
+
+  .navbar__list li a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 12px 24px;
+  }
+
+  .wrapper {
+    max-width: 1920px;
+    margin: 0px auto;
+    padding: 0px 12px;
+  }
+
+  
+  .title {
+    text-align: center;
+  }
+
+  .section__title {
+    display: inline-block;
+    font-weight: bold;
+    font-size: 36px;
+    border-left: solid 15px #a3dea2;
+    padding-left: 17px;
+    margin: 0px;
+  }
+  
+  .FAQ {
+    margin: 75px 25% 41px;
+  }
+
+  .FAQ-questions {
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+
+  hr {
+    border-top: solid 1px #70b282;
+    margin-top: 4px;
+    margin-bottom: 0px;
+  }
+
+  .qnum {
+    font-size: 24px;
+    letter-spacing: 0.22px;
+    color: #70b282;
+    font-family: Questrial-Regular;
+    margin-right: 16px;
+  }
+
+  .question-title {
+    font-size: 18px;
+    letter-spacing: 0.16px;
+    font-weight: 300;
+    margin: 24px auto;
+    cursor: pointer;
+  }
+
+  
+  .FAQ-answer {
+    height: 0px;
+    overflow: hidden;
+    transition-duration: 0.5s;
+  }
+
+  .FAQ-answer-open {
+    height: 136px;
+  }
+
+  .answer {
+    font-size: 16px;
+    letter-spacing: 0.14px;
+    padding-left: 68px;
+    padding-right: 20px;
+    line-height: 24px;
+    margin-top: 24px;
+    margin-bottom: 40px;  
+  }
+  
+
+  .footer__bottom {
+    background-color: #35564b;
+    color: white;
+    text-align: center;
+    height: 48px;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .footer__top {
+    background-color: #e8efee;
+    padding: 32px;
+    color: #484848;
+  }
+
+  .footer__top .wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer__site {
+    font-size: 36px;
+    color: #489846;
+  }
+
+  .footer_info {
+    margin-right: 20px;
+  }
+
+  .footer__info div+div {
+    margin-top: 10px;
+  }
+
+
+
+
+  
+
+  @media(max-width: 768px) {
+      .navbar .wrapper {
+        height: 100px;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0px;
+      }
+      .navbar__list {
+        display: flex;
+        width: 100%;
+      }
+      .navbar__list li {
+        flex: 1;
+        margin-left: 0;
+        border-radius: 0;
+        text-align: center;
+      }
+      .navbar__sitename {
+        margin-top: 10px;
+      }
+      .btn-query {
+          margin-left: 0px;
+          margin-top: 16px;
+      }
+
+      .section__image {
+        flex-direction: column;
+      }
+
+      .section__image div {
+        width: 100%;
+        padding: 0px 10px;
+      }
+
+      .section__comments {
+        flex-direction: column;
+      }
+
+      .section__comment + .section__comment {
+        margin-top: 80px;
+      }
+
+      .footer__top .wrapper {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .footer__info {
+        margin-right: 0px;
+        margin-top: 16px;
+      }
+  }
