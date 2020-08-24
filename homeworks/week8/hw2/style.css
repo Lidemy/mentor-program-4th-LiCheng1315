@@ -1,0 +1,137 @@
+
+html, body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  background-color: rgb(169, 0, 255);
+}
+
+h1 {
+  color: white;
+  margin: 0px;
+  position: absolute;
+  left: 50%;
+  top: 80px;
+  transform: translateX(-50%);
+}
+
+.wrapper {
+  max-width: 1200px;
+  height: 1450px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+}
+
+
+.game-name {
+  border: solid 1px white;
+  border-radius: 3px;
+  padding: 10px 4px;
+  height: 36px;
+  line-height: 36px;
+  color: white;
+  width: 150px;
+  cursor: pointer;
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; 
+  transition: 0.3s;
+}
+
+.game-name:hover {
+  background-color: white;
+  color: #9146FF;
+  font-weight: 900;
+}
+
+
+.game-name + .game-name {
+  margin-left: 20px;
+}
+
+.navbar {
+  text-align: center;
+  top: 150px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.live {
+  width: 855px;
+  /*border: solid 1px white;*/
+  position: absolute;
+  left: 6%;
+  top: 250px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 20px;
+}
+
+
+
+.live-stream {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  height: 200px;
+  background-color: #f0eff2;
+  border-radius: 3px;
+  border: none;
+  padding: 4px;
+  transition: 0.2s;
+}
+
+.live-stream:hover {
+  transform: scale(1.05);
+}
+
+.live-image {
+  width: 240px;
+  height: 135px;
+}
+
+.info {
+  margin-top: 7px;
+  display: flex;
+}
+
+
+.logo {
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
+
+.info-text {
+  margin-left: 10px;
+  display: inline-block;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  overflow:hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; 
+}
+
+.view {
+  font-size: 15px;
+  color: #9146FF;
+}
+
+.view::before {
+  content: "view:"
+}
+
+
+footer {
+  height: 200px;
+  background-color: black;
+}
