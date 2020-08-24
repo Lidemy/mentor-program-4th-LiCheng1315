@@ -62,136 +62,94 @@
 
    
   </body>
+
+
   <script>
     const clientId = 'l5kp2ow5vnm03flnyla22p1pstsrtf';
     const API_ENDPOINT = 'https://api.twitch.tv/kraken';
 
-    const xhr_top5 = new XMLHttpRequest();
-    xhr_top5.open('GET',`${API_ENDPOINT}/games/top?limit=5`,true);
-    xhr_top5.setRequestHeader('Client-ID',clientId);
-    xhr_top5.setRequestHeader('Accept','application/vnd.twitchtv.v5+json');
+    const streamHtml = `
+      <a href = $url target='_blank'>  
+        <div class="live-stream">
+          <img class = "live-image" src="$img">
+          <div class="info">
+            <img class="logo" src="$logo">
+            <div class="info-text">
+              <div class="name">$name</div>
+              <div class="view">$view</div>
+            </div>
+          </div>
+        </div>
+    `
 
-    
+    const getGames = function (cb) {
+      const request = new XMLHttpRequest();
 
-    let top5 = [];
-
-    xhr_top5.onload = function () {
-      
-      response = xhr_top5.response;
-      data = JSON.parse(response);
-
-      const elements = document.querySelector('.navbar');
-
-      console.log(data.top)
-
-      for (let i = 0; i < data.top.length; i += 1) {
-      
-        const div = document.createElement('div');
-        div.classList = "game-name";
-        div.innerText = data.top[i].game.name;
-        elements.appendChild(div);       
-      }
-
-
-      elements.addEventListener('click',
-        function (e) {
-          elements.nextElementSibling.innerHTML = ``;
-          if (e.target.classList.contains('game-name')) {
-            const game = e.target.innerText;
-            const xhr_live = new XMLHttpRequest();
-            xhr_live.open('GET',`${API_ENDPOINT}/streams/?game=${game}&limit=20`,true);
-            xhr_live.setRequestHeader('Client-ID',clientId);
-            xhr_live.setRequestHeader('Accept','application/vnd.twitchtv.v5+json');
-            xhr_live.onload = function () {
-              const lives = JSON.parse(xhr_live.response);
-              console.log(lives.streams[0]);
-              for (let k = 0; k < lives.streams.length; k +=1) {
-                name = lives.streams[k].channel.display_name;
-                url = lives.streams[k].channel.url;
-                logo = lives.streams[k].channel.logo;
-                img = lives.streams[k].preview.medium;
-                view = lives.streams[k].channel.views;
-
-                elements.nextElementSibling.innerHTML += `
-                <a href = ${url} target='_blank'>  
-                  <div class="live-stream">
-                    <img class = "live-image" src="${img}">
-                    <div class="info">
-                      <img class="logo" src="${logo}">
-                      <div class="info-text">
-                        <div class="name">${name}</div>
-                        <div class="view">${view}</div>
-                      </div>
-                    </div>
-                  </div>               
-                `
-              }
-
-              
-            }
-            xhr_live.send();
-          }
+      request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+          data = JSON.parse(request.response);
+          cb(data);
+        } else {
+          alert("error");
         }
-      );
+      }
+      request.open('GET',`${API_ENDPOINT}/games/top?limit=5`,true);
+      request.setRequestHeader('Client-ID',clientId);
+      request.setRequestHeader('Accept','application/vnd.twitchtv.v5+json');
+      request.send();
     }
-    xhr_top5.send();
-/*
-      let game_lives_arr = [];
 
-      for (let j = 0; j < top5.length; j += 1) {
-        let game = top5[j].gameName
-        xhr_live.open('GET',`${API_ENDPOINT}/streams/?game=${game}&limit=20`,true);
-        xhr_live.setRequestHeader('Client-ID',clientId);
-        xhr_live.setRequestHeader('Accept','application/vnd.twitchtv.v5+json');
-        
-        xhr_live.onload = function () { 
-          const lives = JSON.parse(xhr_live.response);
-          console.log(lives.streams[0]);
-          for (let k = 0; k < lives.streams.length; k +=1 ) {
-            let game_info = {};
-            
-            game_info.name = lives.streams[k].channel.display_name;
-            game_info.logo = lives.streams[k].channel.logo;
-            game_info.img = lives.streams[k].preview.medium;
-            game_info.views = lives.streams[k].channel.views;
-            game_lives_arr.push(game_info);
-          }
-          console.log(game_lives_arr);
+    const getStreams = function (game, cb) {
+      const request = new XMLHttpRequest();
+
+      request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+          data = JSON.parse(request.response);
+          cb(data);
+        } else {
+          alert("error");
         }
-        xhr_live.send();
       }
-*/
-      
-    
+      request.open('GET',`${API_ENDPOINT}/streams/?game=${encodeURIComponent(game)}&limit=20`,true);
+      request.setRequestHeader('Client-ID',clientId);
+      request.setRequestHeader('Accept','application/vnd.twitchtv.v5+json');
+      request.send();
+    }
 
-    
+    getGames(
+      (game) => {
+        const elements = document.querySelector('.navbar');
+        var topGame = game.top.map(gameName => gameName.game.name);
 
+        for (game of topGame) {
+          const div = document.createElement('div');
+          div.classList = "game-name";
+          div.innerText = game;
+          elements.appendChild(div);
+        }
+      }
+    );
 
-     
-
-
-    // request.get(
-    //   {
-    //     url: `${API_ENDPOINT}`,
-    //     headers: {
-    //       'Client-ID': clientId,
-    //       /* eslint-disable-next-line */
-    //       'Accept': 'application/vnd.twitchtv.v5+json',
-    //     }
-    //   },
-    //   (err, res, body) => {
-    //     if (err) {
-    //       return console.log(err);
-    //     }
-    //     const games = JSON.parse(body);
-    //     for (let i = 0; i < games.top.length; i += 1) {
-    //       const view = games.top[i].viewers;
-    //       const gameName = games.top[i].game.name;
-    //       console.log(`${view} ${gameName}`);
-    //     }
-    //     return null;
-    //   },
-    // )
+    document.querySelector('.navbar').addEventListener('click',
+      (e) => {
+        if (e.target.classList.contains('game-name')) {
+          document.querySelector('.live').innerHTML = ``;
+          const game = e.target.innerText;
+          getStreams (game,
+            (data) => {
+              for (let stream of data.streams) {
+                document.querySelector('.live').innerHTML += streamHtml
+                                                            .replace('$name',stream.channel.display_name)
+                                                            .replace('$img', stream.preview.medium)
+                                                            .replace('$url', stream.channel.url)
+                                                            .replace('$logo', stream.channel.logo)
+                                                            .replace('$view', stream.channel.views)
+              }
+            }
+          )
+        }
+      }
+    )
 
 
   </script>
