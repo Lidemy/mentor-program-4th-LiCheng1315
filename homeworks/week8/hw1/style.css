@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .navbar {
   box-shadow: -1.4px -1.4px 6px 0 #97a2a0;
   padding: 0px 24px;
@@ -56,9 +60,9 @@
 }
 
 .lottery {
-  background: url("games-bn.png");
-  background-size: contain;
-  background-repeat: repeat;
+  background: url("games.png");
+  background-size: cover;
+  background-repeat: no-repeat;
   height: 750px;
   position: relative;
 }
@@ -75,11 +79,57 @@
   border-radius: 16px;
 }
 
-.prize-message {
+.lottery-result {
+  padding: 40px 20px;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  border-radius: 16px;
+}
+
+.lottery-result__message {
   text-align: center;
   font-size: 28px;
   font-weight: bold;
 }
+
+.lottery-result__btn {
+  width: 400px;
+  height: 55px;
+  display: block;
+  margin: 36px auto 0px;
+  padding: 0;
+  background-color: #e62a45;
+  color: white;
+  font-size: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  text-align: center;
+  line-height: 55px;
+}
+
+.lottery.first-prize {
+  background: url('flight.jpg');
+}
+
+.lottery.second-prize {
+  background: url('living-room.jpg');
+}
+
+
+.lottery.third-prize {
+  background: url('youtube.jpg');
+}
+
+
+.lottery.none-prize {
+  background: black;
+  color: white;
+}
+
+
 
 h1 {
   font-size: 24px;
@@ -121,7 +171,6 @@ td {
   background-color: #e62a45;
   color: white;
   font-size: 20px;
-  border: none;
   border-radius: 8px;
   cursor: pointer;
 
@@ -133,6 +182,9 @@ td {
   transform: scale(1.02);
 }
 
+.hide {
+  display: none;
+}
 
 .footer__top {
   background-color: #e8efee;
@@ -179,9 +231,19 @@ td {
       margin-left: 0;
       border-radius: 0;
       text-align: center;
+      font-size: 15px;
     }
     .navbar__sitename {
       margin-top: 10px;
+    }
+
+    .lottery {
+      background: none;
+    }
+
+    .lottery .wrapper {
+      top: 15px;
+      border-radius: 0;
     }
 
     .footer__top .wrapper {

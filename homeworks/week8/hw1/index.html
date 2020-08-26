@@ -49,7 +49,12 @@
               </tr>
             </tbody>
           </table>
+                    
           <div class="join">我要抽獎</div>
+        </div>
+        <div class="lottery-result hide">
+          <div class="lottery-result__message"></div>
+          <div class="lottery-result__btn">再抽一次</div>
         </div>
       </div>
 
@@ -87,56 +92,96 @@
     </footer>
   </body>
   <script>
+
+
     const API_ENDPOINT = "https://dvwhnbka7d.execute-api.us-east-1.amazonaws.com/default/lottery";
     const errMessage = "系統不穩定，請再試一次";
-
-    const prizeInfo = {
+    const prizes = {
       FIRST: {
-        message: "恭喜你中頭獎了！日本東京來回雙人遊！",
-        imgurl: "flight-4315953_1920.jpg",
+        title: "恭喜你中頭獎了！日本東京來回雙人遊！",
+        className: "first-prize",
       },
       SECOND: {
-        message: "二獎！90 吋電視一台！",
-        imgurl: "living-room.jpg",
+        title: "二獎！90 吋電視一台！",
+        className: "second-prize",
       },
       THIRD: {
-        message: "恭喜你抽中三獎：知名 YouTuber 簽名握手會入場券一張，bang！",
-        imgurl: "youtube.jpg"
+        title: "恭喜你抽中三獎：知名 YouTuber 簽名握手會入場券一張，bang！",
+        className: "third-prize",
       },
       NONE: {
-        message: "銘謝惠顧",
-        imgurl: null,
-      }
+        title: "銘謝惠顧",
+        className: "none-prize",
+      },
     }
 
+    function draw(cb) {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET',API_ENDPOINT,true);
+
+      xhr.onload = function () {
+        let data;
+        if (xhr.status >= 200 && xhr.status < 400) {        
+          try {
+
+            data = JSON.parse(xhr.response);
+
+          } catch (error) {
+
+            cb (errMessage);
+            return;
+          }
+        } else {
+          cb (errMessage);
+          return;
+        }
+
+        if (!data.prize) {
+          cb (errMessage);
+          return;
+        }
+      
+
+        cb(null, data);
+      }
+      xhr.send(); 
+    }
 
     document.querySelector('.join').addEventListener('click',
-      function(e){
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET',API_ENDPOINT,true);
-        
-        xhr.onload = function () {
-          if (xhr.status >= 200 && xhr.status < 400) {
-            const data = JSON.parse(xhr.response);
-            showPrize(data);
-          } else {
+      function(){
+        draw( function (err, data){
+          if (err) {
             alert(errMessage);
-          }
-        }
-        xhr.send(); 
-      }) 
+          } else {
+            let className = prizes[data.prize].className;
+            let title = prizes[data.prize].title;
 
-      function showPrize(data) {
-        const elements = document.querySelector('.lottery .wrapper ');
-        elements.innerHTML = `<div class="prize-message">${prizeInfo[data.prize].message}</div>
-        <div class="join">我要抽獎</div>`;
-        if (data.prize === "NONE") {
-          elements.parentElement.setAttribute('style', 'background: black');
-        } else {
-          elements.parentElement.setAttribute('style', `background: url(${prizeInfo[data.prize].imgurl})`);
-        }
-        
-        elements.setAttribute('style','top: 35%')
-      }
+            // if (data.prize === "FIRST") {
+            //   className = "first-prize";
+            //   title = "恭喜你中頭獎了！日本東京來回雙人遊！";
+            // } else if (data.prize === "SECOND") {
+            //   className = "second-prize"; 
+            //   title = "二獎！90 吋電視一台！";
+            // } else if (data.prize === "THIRD") {
+            //   className = "third-prize";
+            //   title = "恭喜你抽中三獎：知名 YouTuber 簽名握手會入場券一張，bang！";
+            // } else if (data.prize === "NONE") {
+            //   className = "none-prize";
+            //   title = "銘謝惠顧"
+            // }
+
+            document.querySelector('.lottery .wrapper').classList.add('hide');
+            document.querySelector('.lottery-result').classList.remove('hide');
+            document.querySelector('.lottery').classList.add(className);
+            document.querySelector('.lottery-result__message').innerText = title;
+          }
+          
+        })
+    }) 
+
+    document.querySelector('.lottery-result__btn').addEventListener ('click', function (e) {
+
+      window.location.reload();
+    })
   </script>
 </html>
