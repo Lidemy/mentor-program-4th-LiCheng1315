@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Restaurant</title>
+  <meta name=”viewport” content=”width=device-width, initial-scale=1″>
+
+  <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+  <body>
+    <div class="wrapper">
+      <h1>TOP 5</h1>
+      <nav class="navbar">
+        <!-- <div class="game-name">遊戲名字</div> -->
+      </nav>
+      <section class="live">
+        <!--
+        <div class="live-stream">
+          <img class = "live-image" src="https://static-cdn.jtvnw.net/previews-ttv/live_user_summit1g-320x180.jpg">
+          <div class="info">
+            <img class="logo" src="https://static-cdn.jtvnw.net/jtv_user_pictures/xqcow-profile_image-9298dca608632101-300x300.jpeg">
+            <div class="info-text">
+              <div class="name">xQcOW</div>
+              <div class="view">178823659</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+        <div class="live-stream">video</div>
+
+        -->
+        
+    </div>
+
+   
+  </body>
+
+
+  <script>
+    const clientId = 'l5kp2ow5vnm03flnyla22p1pstsrtf';
+    const API_ENDPOINT = 'https://api.twitch.tv/kraken';
+
+    const streamHtml = `
+      <a href = $url target='_blank'>  
+        <div class="live-stream">
+          <img class = "live-image" src="$img">
+          <div class="info">
+            <img class="logo" src="$logo">
+            <div class="info-text">
+              <div class="name">$name</div>
+              <div class="view">$view</div>
+            </div>
+          </div>
+        </div>
+    `
+
+    const getGames = function (cb) {
+      const request = new XMLHttpRequest();
+
+      request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+          data = JSON.parse(request.response);
+          cb(data);
+        } else {
+          alert("error");
+        }
+      }
+      request.open('GET',`${API_ENDPOINT}/games/top?limit=5`,true);
+      request.setRequestHeader('Client-ID',clientId);
+      request.setRequestHeader('Accept','application/vnd.twitchtv.v5+json');
+      request.send();
+    }
+
+    const getStreams = function (game, cb) {
+      const request = new XMLHttpRequest();
+
+      request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+          data = JSON.parse(request.response);
+          cb(data);
+        } else {
+          alert("error");
+        }
+      }
+      request.open('GET',`${API_ENDPOINT}/streams/?game=${encodeURIComponent(game)}&limit=20`,true);
+      request.setRequestHeader('Client-ID',clientId);
+      request.setRequestHeader('Accept','application/vnd.twitchtv.v5+json');
+      request.send();
+    }
+
+    getGames(
+      (game) => {
+        const elements = document.querySelector('.navbar');
+        var topGame = game.top.map(gameName => gameName.game.name);
+
+        for (game of topGame) {
+          const div = document.createElement('div');
+          div.classList = "game-name";
+          div.innerText = game;
+          elements.appendChild(div);
+        }
+      }
+    );
+
+    document.querySelector('.navbar').addEventListener('click',
+      (e) => {
+        if (e.target.classList.contains('game-name')) {
+          document.querySelector('.live').innerHTML = ``;
+          const game = e.target.innerText;
+          getStreams (game,
+            (data) => {
+              for (let stream of data.streams) {
+                document.querySelector('.live').innerHTML += streamHtml
+                                                            .replace('$name',stream.channel.display_name)
+                                                            .replace('$img', stream.preview.medium)
+                                                            .replace('$url', stream.channel.url)
+                                                            .replace('$logo', stream.channel.logo)
+                                                            .replace('$view', stream.channel.views)
+              }
+            }
+          )
+        }
+      }
+    )
+
+
+  </script>
+</html>
