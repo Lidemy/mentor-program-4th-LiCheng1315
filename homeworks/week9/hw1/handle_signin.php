@@ -21,7 +21,7 @@
 
 
   if ($result_check->num_rows == 0) {
-    $sql = sprintf("INSERT INTO `user`(`name`,`nickname`, `password`) VALUES ('%s', '%s','%s')",
+    $sql = sprintf("INSERT INTO `licheng1315_users`(`name`,`nickname`, `password`) VALUES ('%s', '%s','%s')",
     $name,
     $nickname,
     $password

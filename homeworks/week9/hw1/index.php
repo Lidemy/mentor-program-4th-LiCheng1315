@@ -1,7 +1,7 @@
 <?php
   session_start();
   require_once('conn.php');
-  $sql = "SELECT * FROM comments ORDER BY id DESC";
+  $sql = "SELECT * FROM licheng1315_comments ORDER BY id DESC";
   $result = $conn->query($sql);
 
 

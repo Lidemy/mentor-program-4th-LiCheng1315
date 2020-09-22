@@ -2,7 +2,7 @@
   require_once('conn.php');
   $id = $_GET['id'];
 
-  $sql = sprintf("DELETE FROM user WHERE id = '%s'",
+  $sql = sprintf("DELETE FROM licheng1315_users WHERE id = '%s'",
          $id
         );
   $result = $conn->query($sql);

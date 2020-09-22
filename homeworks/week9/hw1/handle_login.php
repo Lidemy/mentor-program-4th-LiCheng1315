@@ -12,7 +12,7 @@
     die("資料不齊全");
   }
 
-  $sql = sprintf("SELECT * FROM user WHERE nickname = '%s' and password = '%s' ",
+  $sql = sprintf("SELECT * FROM licheng1315_users WHERE nickname = '%s' and password = '%s' ",
           $nickname,
           $password
         );

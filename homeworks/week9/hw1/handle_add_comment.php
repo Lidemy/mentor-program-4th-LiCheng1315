@@ -11,7 +11,7 @@
     die("資料不齊全");
   }
 
-  $sql = sprintf("INSERT INTO `comments`(`nickname`, `content`) VALUES ('%s', '%s')",
+  $sql = sprintf("INSERT INTO `licheng1315_comments`(`nickname`, `content`) VALUES ('%s', '%s')",
           $nickname,
           $content
         );
