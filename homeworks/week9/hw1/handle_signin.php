@@ -14,7 +14,7 @@
   }
 
 
-  $sql_check = sprintf("SELECT * FROM user WHERE nickname = '%s'",
+  $sql_check = sprintf("SELECT * FROM licheng1315_users WHERE nickname = '%s'",
                 $nickname
               );
   $result_check = $conn->query($sql_check);
