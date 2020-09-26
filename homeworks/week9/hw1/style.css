@@ -53,6 +53,7 @@ textarea {
 .comment {
   display: flex;
   padding: 5px;
+  max-width: 500px;
 }
 
 .comment + .comment {
@@ -71,6 +72,7 @@ textarea {
 
 .comment__body {
   margin-left: 15px;
+  max-width: 460px;
 }
 
 .comment__nickname {
@@ -84,15 +86,13 @@ textarea {
   font-size: 12px;
 }
 
-.comment__delete {
-  display: inline-block;
-  font-size: 13px;
-  color: #787f94;
+.comment__content {
+  word-wrap: break-word;
+  word-break: break-all;
+  max-width: 100%;
 }
 
-.comment__content {
-  white-space: pre-line;
-}
+
 
 .signin>input {
   margin-top: 10px;
